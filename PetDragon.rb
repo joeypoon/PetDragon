@@ -97,7 +97,7 @@ class PetDragon
       exit
     end
 
-    if sleepy?
+    if sleepy? && !@asleep
       puts @name + " looks tired."
       @spoiled += 1
     end
@@ -119,6 +119,9 @@ class PetDragon
         @asleep = false
       end
     end
+
+    @sleepy += rand(2) + 1
+
   end
 
 end
