@@ -42,7 +42,7 @@ class PetDragon
   def play
     puts @name + " is having fun!"
     if @spoiled > 0
-      @spoiled -= 2
+      @spoiled -= 1
     end
     2.times do
       passingOfTime
