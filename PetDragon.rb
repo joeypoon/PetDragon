@@ -80,15 +80,15 @@ class PetDragon
   end
 
   def hungry?
-    @fullness <= 4
+    @fullness <= 3
   end
 
   def poopy?
-    @poopy >= 7
+    @poopy >= 8
   end
 
   def sleepy?
-    @sleepy >= 7
+    @sleepy >= 8
   end
 
   def passingOfTime
