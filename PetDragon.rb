@@ -15,7 +15,7 @@ class PetDragon
     if hungry?
       puts @name + " ate all the food!"
       @fullness = 10
-      if spoiled > 0
+      if @spoiled > 0
         @spoiled -= 1
       end
     else
@@ -29,7 +29,7 @@ class PetDragon
     if poopy?
       puts @name + " did business outside like a good dragon!"
       @poopy = 0
-      if spoiled > 0
+      if @spoiled > 0
         @spoiled -= 1
       end
     else
