@@ -44,7 +44,7 @@ class PetDragon
     if @spoiled > 0
       @spoiled -= 2
     end
-    2.time do
+    2.times do
       passingOfTime
     end
   end
