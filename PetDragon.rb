@@ -19,9 +19,8 @@ class PetDragon
         @spoiled -= 1
       end
     else
-      puts @name " is not hungry!"
+      puts @name + " is not hungry!"
       @spoiled += 1
-      spoiled
     end
     passingOfTime
   end
@@ -36,9 +35,18 @@ class PetDragon
     else
       puts @name + " did not need to do business."
       @spoiled += 1
-      spoiled
     end
     passingOfTime
+  end
+
+  def play
+    puts @name + " is having fun!"
+    if @spoiled > 0
+      @spoiled -= 2
+    end
+    2.time do
+      passingOfTime
+    end
   end
 
   def putToBed
@@ -57,25 +65,22 @@ class PetDragon
       if @spoiled > 0
         @spoiled -= 1
       end
+      @sleepy = 0
     else
       puts @name + " is not sleepy and refuses to sleep!"
       @spoiled += 1
-      spoiled
       passingOfTime
     end
   end
 
   private
 
-  def spoiled
-    if @spoiled >= 10
-      puts @name + " is spoiled and decides to eat you!"
-      exit
-    end
+  def spoiled?
+    @spoiled >= 10
   end
 
   def hungry?
-    @fullness <= 6
+    @fullness <= 4
   end
 
   def poopy?
@@ -87,7 +92,33 @@ class PetDragon
   end
 
   def passingOfTime
+    if spoiled?
+      puts @name + " has become spoiled and decides to eat you!"
+      exit
+    end
 
+    if sleepy?
+      puts @name + " looks tired."
+      @spoiled += 1
+    end
+
+    if @fullness > 0
+      @fullness -= 1
+      @poopy += 1
+    else
+      @spoiled += 2
+    end
+
+    if @asleep
+      if hungry?
+        puts @name + " woke up from a grumbling tummy."
+        @asleep = false
+      end
+      if poopy?
+        puts @name + " woke up and looks around restlessly!"
+        @asleep = false
+      end
+    end
   end
 
 end
@@ -96,15 +127,17 @@ puts "Please enter your dragon's name: "
 dragon = PetDragon.new gets.chomp
 
 while true
-  puts "Commands:\n feed\n walk\n sleep\n"
+  puts "Commands:\n feed\n walk\n play\n sleep\n"
   action = gets.chomp
 
   case action
-  when feed
+  when "feed"
     dragon.feed
-  when walk
+  when "walk"
     dragon.walk
-  when sleep
+  when "play"
+    dragon.play
+  when "sleep"
     dragon.putToBed
   else
     puts "Invalid command."
